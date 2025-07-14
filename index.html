@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Esmeralda Corp. - Inicio</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    .user-select {
+      border: 1px solid #28a745;
+      padding: 5px;
+      color: #28a745;
+      background-color: transparent;
+      font-weight: bold;
+      width: auto;
+    }
+
+    .form-select {
+      border-radius: 0 !important;
+    }
+
+    .feature-icon {
+      font-size: 48px;
+      color: #28a745;
+    }
+
+    .card-hover:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: 0.3s;
+    }
+
+    .card-equal {
+      height: 100%;
+      transition: transform 0.4s ease;
+    }
+
+    .card-equal:hover {
+      transform: scale(1.05);
+    }
+
+    .carousel-inner {
+      max-height: 600px;
+    }
+
+    .carousel-item picture,
+    .carousel-item img {
+      width: 100%;
+      height: 600px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-item img {
+        height: 400px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header-->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://esmeraldacorp.pe/wp-content/uploads/2023/04/Esmeralda_Logotipohorizontal.png" alt="Logo Esmeralda" class="me-2" style="height:70px; width:200px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="avisos.html">Avisos</a></li>
+          <li class="nav-item"><a class="nav-link" href="actividades.html">Actividades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Reconocimientos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Beneficios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Quiénes somos</a></li>
+          <li class="nav-item ms-3">
+            <select id="user-select" class="user-select form-select form-select-sm" onchange="handleUserSelect(this)">
+              <option value="">Cuenta</option>
+              <option value="logout">Cerrar sesión</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="3000">
+        <picture>
+          <source media="(max-width: 768px)" srcset="C1.jpg">
+          <img src="PRUEBA03.webp" class="d-block w-100" alt="Equipo Esmeralda">
+        </picture>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <picture>
+          <source media="(max-width: 768px)" srcset="C2.jpeg">
+          <img src="PRUEBA02.webp" class="d-block w-100" alt="Slide 2">
+        </picture>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <picture>
+          <source media="(max-width: 768px)" srcset="C3.jpg">
+          <img src="PRUEBA01.webp" class="d-block w-100" alt="Slide 3">
+        </picture>
+      </div>
+    </div>
+  </div>
+
+  <section class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-4 d-flex" data-aos="zoom-in">
+        <a href="tu_dia.html" class="text-decoration-none text-dark flex-fill">
+          <div class="card text-center p-4 card-hover card-equal">
+            <div class="feature-icon mb-3">�헕️</div>
+            <p>Menú de la semana<br>Ruta de buses<br>Grupo de acercamiento<br>Panistería Soraya</p>
+            <p class="fw-semibold">Tu día empieza aquí</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 d-flex" data-aos="zoom-in" data-aos-delay="100">
+        <a href="pagina2.html" class="text-decoration-none text-dark flex-fill">
+          <div class="card text-center p-4 card-hover card-equal">
+            <div class="feature-icon mb-3">👥</div>
+            <p>Conoce a Gestión Humana<br>Presentación de áreas, números y horarios de atención</p>
+            <p class="fw-semibold">¿Con quién hablo?</p>
+          </div>
+        </a>
+      </div>
+      <div class="col-md-4 d-flex" data-aos="zoom-in" data-aos-delay="200">
+        <a href="pagina3.html" class="text-decoration-none text-dark flex-fill">
+          <div class="card text-center p-4 card-hover card-equal">
+            <div class="feature-icon mb-3">🎥</div>
+            <p>Fotos, vídeos, campañas y recordatorios clave.</p>
+            <p class="fw-semibold">Lo que pasó y lo que viene</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+    function handleUserSelect(select) {
+      if (select.value === 'logout') {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userDNI');
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
+</body>
+
+</html>

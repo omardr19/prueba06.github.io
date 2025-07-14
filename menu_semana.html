@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esmeralda Corp. - Menú Semanal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .user-select {
+            border: 1px solid #28a745;
+            padding: 5px;
+            color: #28a745;
+            background-color: transparent;
+            font-weight: bold;
+            width: auto;
+        }
+
+        .form-select {
+            border-radius: 0 !important;
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            color: #28a745;
+        }
+
+        .card-hover:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+        }
+
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .card-equal {
+            height: 100%;
+        }
+
+        .fixed-card {
+            min-height: 320px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .day-header {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .menu-item {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            font-weight: 600;
+            color: #28a745;
+        }
+
+        .menu-toggle {
+            border: none;
+            background: transparent;
+            font-weight: bold;
+            padding: 10px 20px;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .menu-toggle.active {
+            color: #28a745;
+        }
+
+        .menu-toggle.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            background-color: #28a745;
+            border-radius: 3px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        .menu-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://esmeraldacorp.pe/wp-content/uploads/2023/04/Esmeralda_Logotipohorizontal.png"
+                    alt="Logo Esmeralda" class="me-2" style="height:70px; width:200px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="avisos.html">Avisos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="actividades.html">Actividades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Reconocimientos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Beneficios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Quiénes somos</a></li>
+                    <li class="nav-item ms-3">
+                        <select id="user-select" class="user-select form-select form-select-sm"
+                            onchange="if(this.value==='logout') window.location.href='login.html';">
+                            <option value="">Cuenta</option>
+                            <option value="logout">Cerrar sesión</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="container py-5">
+        <div class="text-center mb-4">
+            <button class="menu-toggle active" onclick="toggleMenu('jovana')" id="btn-jovana">Comedor Jovana</button>
+            <button class="menu-toggle" onclick="toggleMenu('camal')" id="btn-camal">Comedor Camal</button>
+        </div>
+
+        <div id="menu-jovana" class="menu-section active">
+            <div class="row g-4">
+
+                <!-- JOVANA -->
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">LUNES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Puré con chancho al horno
+                        </div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Tallarín saltado de
+                            chancho</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Chuletas con papas fritas
+                        </div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Ensalada rusa</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Filete de pollo al pimiento
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">MARTES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Puré con chancho al horno
+                        </div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Tallarín saltado de
+                            chancho</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Chuletas con papas fritas
+                        </div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Ensalada rusa</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Filete de pollo al pimiento
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">MIERCOLES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Puré con chancho al horno
+                        </div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Tallarín saltado de
+                            chancho</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Chuletas con papas fritas
+                        </div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Ensalada rusa</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Filete de pollo al pimiento
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">JUEVES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Puré con chancho al horno
+                        </div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Tallarín saltado de
+                            chancho</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Chuletas con papas fritas
+                        </div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Ensalada rusa</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Filete de pollo al pimiento
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">VIERNES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Puré con chancho al horno
+                        </div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Tallarín saltado de
+                            chancho</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Chuletas con papas fritas
+                        </div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Ensalada rusa</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Filete de pollo al pimiento
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">SABADO</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Puré con chancho al horno
+                        </div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Tallarín saltado de
+                            chancho</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Chuletas con papas fritas
+                        </div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Ensalada rusa</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Filete de pollo al pimiento
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!----------------------------------------------CAMAL------------------------------------------------>
+
+        <div id="menu-camal" class="menu-section">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">LUNES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Arroz con pollo</div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Estofado de carne con
+                            fideos</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Lomo saltado</div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Crema de zapallo</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Pechuga a la plancha con
+                            ensalada</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">MARTES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Arroz con pollo</div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Estofado de carne con
+                            fideos</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Lomo saltado</div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Crema de zapallo</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Pechuga a la plancha con
+                            ensalada</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">MIERCOLES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Arroz con pollo</div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Estofado de carne con
+                            fideos</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Lomo saltado</div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Crema de zapallo</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Pechuga a la plancha con
+                            ensalada</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">JUEVES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Arroz con pollo</div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Estofado de carne con
+                            fideos</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Lomo saltado</div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Crema de zapallo</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Pechuga a la plancha con
+                            ensalada</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">VIERNES</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Arroz con pollo</div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Estofado de carne con
+                            fideos</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Lomo saltado</div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Crema de zapallo</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Pechuga a la plancha con
+                            ensalada</div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card text-center p-4 card-hover fixed-card h-100">
+                        <div class="day-header">SABADO</div>
+                        <div class="menu-item"><span class="section-title">Básico 1</span><br>Arroz con pollo</div>
+                        <div class="menu-item"><span class="section-title">Básico 2</span><br>Estofado de carne con
+                            fideos</div>
+                        <div class="menu-item"><span class="section-title">Ejecutivo</span><br>Lomo saltado</div>
+                        <div class="menu-item"><span class="section-title">Entrada</span><br>Crema de zapallo</div>
+                        <div class="menu-item"><span class="section-title">Dieta</span><br>Pechuga a la plancha con
+                            ensalada</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu(type) {
+            const jovanaBtn = document.getElementById('btn-jovana');
+            const camalBtn = document.getElementById('btn-camal');
+            const jovanaMenu = document.getElementById('menu-jovana');
+            const camalMenu = document.getElementById('menu-camal');
+
+            if (type === 'jovana') {
+                jovanaMenu.classList.add('active');
+                camalMenu.classList.remove('active');
+                jovanaBtn.classList.add('active');
+                camalBtn.classList.remove('active');
+            } else {
+                camalMenu.classList.add('active');
+                jovanaMenu.classList.remove('active');
+                camalBtn.classList.add('active');
+                jovanaBtn.classList.remove('active');
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

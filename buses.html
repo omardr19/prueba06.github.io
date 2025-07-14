@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Esmeralda Corp. - Rutas de Buses</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- AOS CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .user-select {
+            border: 1px solid #28a745;
+            padding: 5px;
+            color: #28a745;
+            background-color: transparent;
+            font-weight: bold;
+            width: auto;
+        }
+
+        .form-select {
+            border-radius: 0 !important;
+        }
+
+        .linea-img {
+            max-width: 100%;
+            max-height: 80vh;
+            width: auto;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .linea-img:hover {
+            transform: scale(1.02);
+        }
+
+        .nav-tabs {
+            border-bottom: none;
+            justify-content: center;
+            position: relative;
+        }
+
+        .nav-tabs .nav-link {
+            border: none;
+            position: relative;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .nav-tabs .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background-color: #28a745;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-tabs .nav-link.active::after {
+            width: 100%;
+        }
+
+        .schedule-buttons .btn {
+            margin: 0.2rem;
+        }
+
+        .zoom-modal {
+            display: none;
+            position: fixed;
+            z-index: 1050;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .zoom-modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            cursor: zoom-out;
+        }
+
+        .zoom-modal.show {
+            display: flex;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1060;
+        }
+    </style>
+    <script>
+        AOS.init();
+
+        function showImage(src) {
+            const activeTab = document.querySelector(".tab-pane.active");
+            const img = activeTab.querySelector("img");
+            img.src = src;
+            img.setAttribute("data-aos", "fade-up");
+        }
+
+        function handleUserSelect(select) {
+            if (select.value === "logout") {
+                window.location.href = "logout.html";
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- Zoom -->
+    <div class="zoom-modal" id="zoomModal">
+        <span class="close-btn" onclick="document.getElementById('zoomModal').classList.remove('show')">&times;</span>
+        <img id="zoomedImg" src="" alt="Imagen Ampliada">
+    </div>
+
+    <!-- Header-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://esmeraldacorp.pe/wp-content/uploads/2023/04/Esmeralda_Logotipohorizontal.png"
+                    alt="Logo Esmeralda" class="me-2" style="height: 70px; width: 200px" />
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="avisos.html">Avisos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="actividades.html">Actividades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reconocimientos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Beneficios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Quiénes somos</a>
+                    </li>
+                    <li class="nav-item ms-3">
+                        <select id="user-select" class="user-select form-select form-select-sm"
+                            onchange="handleUserSelect(this)">
+                            <option value="">Cuenta</option>
+                            <option value="logout">Cerrar sesión</option>
+                        </select>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido -->
+    <div class="container py-5">
+        <h2 class="text-center mb-4">Rutas de Buses</h2>
+
+        <ul class="nav nav-tabs justify-content-center" id="lineaTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="linea1-tab" data-bs-toggle="tab" data-bs-target="#linea1"
+                    type="button">
+                    1 - Benavides
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="linea2-tab" data-bs-toggle="tab" data-bs-target="#linea2" type="button">
+                    2 - Chorrillos
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="linea3-tab" data-bs-toggle="tab" data-bs-target="#linea3" type="button">
+                    3 - Villa El Salvador
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-4" id="lineaTabsContent">
+            <div class="tab-pane fade show active text-center" id="linea1" role="tabpanel">
+                <h4 class="mb-3">Línea 1 - Benavides</h4>
+                <div class="schedule-buttons">
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (02).jpg')">
+                        04:55 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (03).jpg')">
+                        05:50 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (04).jpg')">
+                        07:10 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (05).jpg')">
+                        04:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (06).jpg')">
+                        05:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (07).jpg')">
+                        06:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('benavides (08).jpg')">
+                        01:10 p.m.
+                    </button>
+                </div>
+                <img id="linea1-img" src="benavides (01).jpg" alt="Ruta Benavides" class="linea-img mt-3"
+                    data-aos="fade-up" />
+            </div>
+
+            <div class="tab-pane fade text-center" id="linea2" role="tabpanel">
+                <h4 class="mb-3">Línea 2 - Chorrillos</h4>
+                <div class="schedule-buttons">
+                    <button class="btn btn-outline-success" onclick="showImage('chorrillos (02).jpg')">
+                        05:20 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('chorrillos (03).jpg')">
+                        06:05 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('chorrillos (04).jpg')">
+                        07:15 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('chorrillos (05).jpg')">
+                        05:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('chorrillos (06).jpg')">
+                        01:10 p.m.
+                    </button>
+                </div>
+                <img id="linea2-img" src="chorrillos (01).jpg" alt="Ruta Chorrillos" class="linea-img mt-3"
+                    data-aos="fade-up" />
+            </div>
+
+            <div class="tab-pane fade text-center" id="linea3" role="tabpanel">
+                <h4 class="mb-3">Línea 3 - Villa El Salvador</h4>
+                <div class="schedule-buttons">
+                    <button class="btn btn-outline-success" onclick="showImage('villa (02).jpg')">
+                        05:10 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('villa (03).jpg')">
+                        05:50 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('villa (04).jpg')">
+                        07:05 a.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('villa (05).jpg')">
+                        04:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('villa (06).jpg')">
+                        05:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('villa (07).jpg')">
+                        06:10 p.m.
+                    </button>
+                    <button class="btn btn-outline-success" onclick="showImage('villa (08).jpg')">
+                        01:10 p.m.
+                    </button>
+                </div>
+                <img id="linea3-img" src="villa (01).jpg" alt="Ruta Villa El Salvador" class="linea-img mt-3"
+                    data-aos="fade-up" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init();
+
+        function showImage(src) {
+            const activeTab = document.querySelector(".tab-pane.active");
+            const img = activeTab.querySelector("img");
+            img.src = src;
+            img.setAttribute("data-aos", "fade-up");
+        }
+
+        function handleUserSelect(select) {
+            if (select.value === "logout") {
+                window.location.href = "logout.html";
+            }
+        }
+
+        // Zoom de imagen al hacer clic
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".linea-img").forEach(img => {
+                img.addEventListener("click", () => {
+                    const modal = document.getElementById("zoomModal");
+                    const zoomedImg = document.getElementById("zoomedImg");
+                    zoomedImg.src = img.src;
+                    modal.classList.add("show");
+                });
+            });
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>
